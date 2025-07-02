@@ -27,7 +27,7 @@ sel_muni <- "Orotava, La"
 ## Get Spain municipalities
 spanish_muni_sf <- gisco_get_communes(
     country = "Spain"
-) |> 
+) |>    # pipe operator is shift + cmd + m
     st_transform(sel_crs) # Change CRS to show geometry in meters
 
 ## Visualize
@@ -52,7 +52,7 @@ mapview(tenerife_sf)
 ## 2.3. Get Tenerife municipalities ------------
 
 ## Filter municipalities intersecting Tenerife Island
-tenerife_muni_sf <- st_filter(         # arrow operator is cmd -
+tenerife_muni_sf <- st_filter(         # arrow operator is option -
     x = spanish_muni_sf,
     y = tenerife_sf
 )
@@ -65,10 +65,13 @@ mapview(tenerife_muni_sf)
 ## 3.1. Select a municipality -----------------
 
 ## Filter municipality
-
+selected_muni_sf <- tenerife_muni_sf |> 
+    filter(
+        NAME_LATN == sel_muni
+    )
 
 ## Visualize
-
+mapview(selected_muni_sf)
 
 ## 3.2. Get satellite image -------------------
 
