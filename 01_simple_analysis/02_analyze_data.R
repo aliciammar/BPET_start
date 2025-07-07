@@ -12,17 +12,16 @@
 
 library(sf)
 library(terra)
-library(tictoc)
 library(tidyterra)
 library(tidyverse)
 
 # 2. Load data ------------------------------------------------------------
 
 ## Study area
-
+selected_muni_sf <- read_sf("data/municipality.geojson")
 
 ## Satellite image
-
+sentinel_sr <- rast("data/sentinel/ES6538026.tif")
 
 # 3. Data analysis --------------------------------------------------------
 
