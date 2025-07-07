@@ -102,7 +102,7 @@ plot(
 # 4. Export ---------------------------------------------------------------
 
 ## Export municipality
-
+write_sf(selected_muni_sf, "data/municipality.geojson")
 
 
 
