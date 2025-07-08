@@ -35,8 +35,40 @@ names(ndvi_sr) <- "NDVI"
 # 4. Results --------------------------------------------------------------
 
 ## Visualize
+ndvi_gg <- ggplot() +
+    geom_spatraster(
+        data = ndvi_sr
+        ) +
+    geom_sf(
+        data  = selected_muni_sf,
+        color = "darkblue",
+        fill  = "transparent",
+        lwd   = 1
+    ) +
+    scale_fill_gradientn(
+        colors = hcl.colors(20, "RdYlGn")
+    ) +
+    labs(
+        title = "NDVI in La Orotava, Tenerife",
+        fill  = "NDVI"
+    ) +
+    theme_void() +
+    theme(
+        plot.title = element_text(
+            face   = "bold",
+            size   = 14,
+            family = "Roboto",
+            hjust  = 0.5
+        )
+    )
 
 
 ## Save plot
-
+ggsave(
+    filename = str_glue("figures/NDVI_{selected_muni_sf$id}.png"),
+    plot     = ndvi_gg,
+    width    = 8,
+    height   = 9
+    
+)
 
