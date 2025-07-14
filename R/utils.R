@@ -90,3 +90,36 @@ calculate_ndvi <- function(data) {
     ndvi_sr
     
 }
+
+
+## FUNCTION: Create the map
+create_ndvi_gg <- function(ndvi_sr, muni_sf) {
+    
+    ggplot() +
+        geom_spatraster(
+            data = ndvi_sr
+        ) +
+        geom_sf(
+            data  = muni_sf,
+            color = "darkblue",
+            fill  = "transparent",
+            lwd   = 1
+        ) +
+        scale_fill_gradientn(
+            colors = hcl.colors(20, "RdYlGn")
+        ) +
+        labs(
+            title = str_glue("NDVI in {muni_sf$fixed_names}, Tenerife"),
+            fill  = "NDVI"
+        ) +
+        theme_void() +
+        theme(
+            plot.title = element_text(
+                face   = "bold",
+                size   = 14,
+                family = "Roboto",
+                hjust  = 0.5
+            )
+        )
+    
+} 

@@ -18,6 +18,7 @@ library(rsi)
 library(rstac)
 library(terra)
 library(tictoc)
+library(tidyterra)
 library(tidyverse)
 
 source("R/utils.R")
@@ -55,8 +56,23 @@ toc()
 
 # 4. Maps -----------------------------------------------------------------
 
-## Create the maps
-
+## Create the maps (creates 1 SpatRaster for each of the elements)
+ndvi_gg_list <- map2(   # Need to use map2() because the plotting function we made has 2 arguments)
+    ndvi_list,
+    tenerife_muni_list,
+    create_ndvi_gg
+)
+# Use ndvi_gg_list[[#]] to plot one of the SpatRasters
 
 ## Save the maps
-
+map2(
+    ndvi_gg_list,
+    tenerife_muni_list,
+    \(x, y) ggsave(
+        filename = str_glue("figures/NDVI_{y$id}.png"),
+        plot     = x,
+        width    = 8,
+        height   = 9
+        
+    )
+)
